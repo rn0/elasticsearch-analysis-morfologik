@@ -19,9 +19,6 @@
 
 package org.elasticsearch.index.analysis.pl;
 
-import morfologik.stemming.*;
-import morfologik.stemming.PolishStemmer.DICTIONARY;
-import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.morfologik.*;
 
 import org.elasticsearch.common.inject.Inject;
@@ -30,13 +27,8 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.Index;
 import org.elasticsearch.index.analysis.AbstractIndexAnalyzerProvider;
-import org.elasticsearch.index.analysis.Analysis;
 import org.elasticsearch.index.settings.IndexSettings;
 
-import java.util.Set;
-
-/**
- */
 public class MorfologikAnalyzerProvider extends AbstractIndexAnalyzerProvider<MorfologikAnalyzer> {
 
     private final MorfologikAnalyzer analyzer;
@@ -44,7 +36,7 @@ public class MorfologikAnalyzerProvider extends AbstractIndexAnalyzerProvider<Mo
     @Inject
     public MorfologikAnalyzerProvider(Index index, @IndexSettings Settings indexSettings, Environment env, @Assisted String name, @Assisted Settings settings) {
         super(index, indexSettings, name, settings);
-        analyzer = new MorfologikAnalyzer(version, PolishStemmer.DICTIONARY.COMBINED);
+        analyzer = new MorfologikAnalyzer(version);
     }
 
     @Override

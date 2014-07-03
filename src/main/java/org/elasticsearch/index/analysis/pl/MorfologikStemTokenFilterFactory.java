@@ -19,11 +19,8 @@
 
 package org.elasticsearch.index.analysis.pl;
 
-import morfologik.stemming.*;
-import morfologik.stemming.PolishStemmer.DICTIONARY;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.morfologik.*;
-
 
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.assistedinject.Assisted;
@@ -32,10 +29,6 @@ import org.elasticsearch.index.Index;
 import org.elasticsearch.index.settings.IndexSettings;
 import org.elasticsearch.index.analysis.AbstractTokenFilterFactory;
 
-import java.io.IOException;
-
-
-
 public class MorfologikStemTokenFilterFactory extends AbstractTokenFilterFactory {
 
     @Inject public MorfologikStemTokenFilterFactory(Index index, @IndexSettings Settings indexSettings, @Assisted String name, @Assisted Settings settings) {
@@ -43,6 +36,6 @@ public class MorfologikStemTokenFilterFactory extends AbstractTokenFilterFactory
     }
 
     @Override public TokenStream create(TokenStream tokenStream) {
-        return new MorfologikFilter(tokenStream, PolishStemmer.DICTIONARY.COMBINED, version);
+        return new MorfologikFilter(tokenStream, version);
     }
 }
